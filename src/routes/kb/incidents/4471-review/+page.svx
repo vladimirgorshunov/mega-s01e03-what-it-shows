@@ -1,0 +1,114 @@
+---
+layout: runbook
+title: '#4471 reviewed · separate the causes, keep the uncertainty'
+owner: Vladimir Gorshunov
+status: reviewed
+reviewed: 2026-11-02
+signature: 'Vladimir Gorshunov / OpenAI Codex / S01E03 / 2026-11-02'
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import EvidenceReview from '#lib/kb/EvidenceReview.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import { timelineFrom, timelineTo } from '#lib/kb/evidence';
+</script>
+
+The [original incident page](/kb/incidents/4471/) says “one issue, one fix queued.” Its own
+rendered data disagrees. This review uses the complete 2026-10-04 export, deduplicates report
+IDs, and reads every tenant's locale and booking form. The original pages, components and
+accepted decision remain intact as historical evidence, not as the conclusion of this review.
+
+## File the problems separately
+
+<EvidenceReview section="summary" />
+
+**Parser:** the shared parser reads month first, while these tenants write day first.
+App and email reports, plus booking-v2 form reports, follow that assignment. A booking-v3
+tenant's app/email report still follows the parser path.
+
+**Hint:** booking-v3 prints `MM/DD/YYYY`, but its form reads the date the tenant's day-first
+way. People can follow the hint and still get the wrong date. Align the hint and accepted
+input convention; a shared-parser fix alone does not settle this problem.
+
+These are disjoint filing buckets computed by `causeOf`, not two production fixes demonstrated
+in this repository. The export contains no runnable booking service or production parser.
+
+## Keep the unresolved observations visible
+
+<Callout kind="warn">
+A tenant-based filing rule does not explain every symptom. Do not promise that a parser fix
+resolves one-day moves, timezone-dependent displays, or an invite allegedly arriving before
+its booking. None of those diagnoses has been reproduced from this export.
+</Callout>
+
+<EvidenceReview section="flags" />
+
+The desk's note calls this subset `oneDayMove`, but an ordering allegation is not itself a
+measured one-day shift. Lisbon versus Toronto suggests timezone context worth collecting,
+not proof of a timezone or daylight-saving defect. Obtain original booking/invite timestamps,
+input values, tenant settings and display timezones; establish a reproducible failure before
+splitting another cause. If that evidence changes an assignment, move its report IDs and
+recompute the issue counts instead of double-counting them.
+
+## Check every tenant, not the reporter's browser
+
+The platform's locale date-part order determines day-first behavior. A form report belongs to
+the hint bucket only when the tenant is day-first and runs booking-v3. Missing or non-day-first
+tenants remain unplaced; do not force them into either known cause.
+
+<EvidenceReview section="tenants" />
+
+## The queue did not start in July
+
+Use `receivedAt` for when the desk heard about a problem, and `mergedAt` for when it processed
+the report into this ticket. The chart deduplicates IDs and buckets those timestamps separately
+into Monday–Sunday weeks. Its range here is derived from the data, including the latest merge.
+
+<QueueTimeline ticket={4471} from={timelineFrom} to={timelineTo} />
+
+<EvidenceReview section="months" />
+
+Continued reports and the final reporter's “I have stopped reporting these” also mean the
+exported count is not a count of everyone affected. No resolution is established here.
+
+## Merge on established cause, not subject
+
+The [subject-only triage page](/kb/triage/dedupe/) follows
+[accepted decision 0001](/kb/decisions/0001-dedupe-by-subject/), reviewed in 2024. Its stale
+banner is meaningful: the examples below show both false merges and missed duplicates.
+The same tenant can have different causes by channel; different tenants and subjects can
+have the same cause. Two unknown senders do not establish the same cause.
+
+<DedupeExplorer />
+
+[Proposed decision 0002](/kb/decisions/0002-dedupe-by-cause/) replaces subject-only matching
+with an evidence-based recommendation. It is proposed, not a claim that the desk has adopted
+it: read the body, inspect tenant locale/form/channel, and merge only when an established
+cause matches. Keep unresolved evidence separate from certainty; preserve IDs and the original
+arrival time. A ticket being marked “known” does not prove every report in it is explained.
+
+## What the original component shows
+
+This is the unchanged export component. Its “no ticket of its own” column describes the
+export's historical ticket state; the new issue links above are the actual split filed by this
+review. Its footnote deliberately retains the flagged reports inside the parser bucket.
+
+<CauseTable ticket={4471} />
+
+## Keep the desk's next changes honest
+
+Reports, notes and tenant files feed the components; eager imports are a snapshot, not a live
+desk subscription. Rebuild when a newer export arrives. Counts, group membership, timeline
+range, warning rows and explorer verdicts are recomputed from those inputs. Review anomalous
+reports rather than treating the classifier as exhaustive root-cause proof. Update the linked
+GitHub issue counts when the filing changes, and review this page again; its stale warning
+appears after the shared review-age threshold. Never rewrite an accepted decision record.
+
+The machine-readable [render evidence](/evidence.json) contains every assigned report ID.
+This page's desk reference below is computed from its frontmatter signature, not typed by hand.
+
+<RenderStamp {signature} />

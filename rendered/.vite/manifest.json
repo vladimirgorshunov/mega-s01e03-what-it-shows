@@ -1,0 +1,8 @@
+{
+  "src/entry-client.js": {
+    "file": "assets/entry-client-BQaa6JW6.js",
+    "name": "entry-client",
+    "src": "src/entry-client.js",
+    "isEntry": true
+  }
+}

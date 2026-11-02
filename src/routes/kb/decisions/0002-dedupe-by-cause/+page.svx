@@ -1,0 +1,54 @@
+---
+layout: runbook
+title: '0002 · Match established causes, not subject lines'
+owner: Vladimir Gorshunov
+status: proposed
+reviewed: 2026-11-02
+signature: 'Vladimir Gorshunov / OpenAI Codex / S01E03 / 2026-11-02'
+---
+
+<script>
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+**Date:** 2 November 2026 · **Author:** Vladimir Gorshunov with OpenAI Codex
+
+**Proposed replacement for:** [accepted decision 0001](/kb/decisions/0001-dedupe-by-subject/).
+That accepted record is preserved unchanged. This proposal does not claim support-desk adoption.
+
+## Context
+
+The [review of #4471](/kb/incidents/4471-review/) finds a parser/input-order problem and a
+booking-form hint problem inside one “known” ticket. A matching subject does not establish
+that the same code path failed. The supplied explorer shows both same-subject/different-cause
+and different-subject/same-cause cases, plus an unknown-tenant case that must not be merged
+merely because its text matches.
+
+## Proposed decision
+
+Read the body and establish the affected behavior. Look up the tenant's locale and form,
+and preserve the channel, original report ID and `receivedAt`. Use those facts and the available
+implementation evidence to compare causes; subject matching is only a search aid.
+
+For this export, the shared classifier separates parser from booking-v3 hint reports.
+It is not an exhaustive diagnosis of production behavior. Preserve one-day/ordering observations
+as unresolved evidence and investigate them before claiming a new cause or its fix.
+Missing tenant data or an unplaced report means **investigate**, not “merge because both are unknown.”
+
+Merge reports only when an established cause matches. Keep different causes in separate tickets.
+Deduplicate export overlap by report ID, not subject or row count. When new evidence changes a
+filing, move the report IDs and recompute counts; do not count the same report twice. Distinguish
+arrival time from the desk's later merge time, and never use “known” to hide unexplained symptoms.
+
+## Consequences
+
+Triage requires reading and tenant context, rather than a cheap subject-only rule. Engineering
+gets independent fixes with traceable counts. Uncertainty stays visible; unknown reports are not
+silently merged and a large count is not mistaken for one demonstrated root cause.
+
+## Executable examples
+
+<DedupeExplorer />
+
+<RenderStamp {signature} />

@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-02",
+  "browser": "Safari via safari-mcp",
+  "url": "http://127.0.0.1:4173/kb/incidents/4471-review/",
+  "source": "/src/routes/kb/incidents/4471-review/+page.svx",
+  "build": "npm run build: passed; actual client and server Svelte builds rendered six KB pages",
+  "checks": "npm run check: passed; deduplication, tenant/channel assignment, five caveats, future input, staleness boundary, rendered counts",
+  "summary": "412 unique reports · 427 export rows · 15 overlapping copies removed",
+  "issueCounts": { "parser": 379, "hint": 33 },
+  "deskRef": "DR-2JTV-PVK2",
+  "signature": "Vladimir Gorshunov / OpenAI Codex / S01E03 / 2026-11-02",
+  "loadedCssRules": 42,
+  "renderedWeeklyChartBars": 54,
+  "flaggedIds": ["R-41202", "R-41209", "R-41236", "R-41344", "R-41620"],
+  "interactions": [
+    { "state": "initial Alder form versus Kettle form", "causes": ["hint", "parser"], "verdict": "different causes — keep apart" },
+    { "state": "Alder channel changed to app and native change event dispatched", "causes": ["parser", "parser"], "verdict": "same cause — merge" },
+    { "state": "report A subject changed to Different subject entirely with input event", "causes": ["parser", "parser"], "verdict": "same cause — merge" },
+    { "state": "default channels and subject restored", "causes": ["hint", "parser"], "verdict": "different causes — keep apart" }
+  ],
+  "toolCaveat": "Safari selectMenuItem changed the option but did not dispatch change. Explicit DOM Event('change', {bubbles:true}) exercised the real hydrated Svelte listener. Tool defect reported; not an application fallback.",
+  "capture": "review-desktop.png",
+  "captureDimensions": { "width": 2048, "height": 9994 },
+  "viewport": { "width": 1024, "height": 678 },
+  "scope": "KB export evidence only. No production booking service, parser fix, or timezone diagnosis was tested."
+}
