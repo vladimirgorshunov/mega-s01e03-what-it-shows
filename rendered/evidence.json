@@ -1,6 +1,28 @@
 {
   "provenance": "support-kb export dated 2026-10-04; original source and data preserved",
   "ticket": 4471,
+  "deskUpdate": {
+    "source": "https://hq.mega.dev/challenges/what-it-shows",
+    "observedOn": "2026-11-02",
+    "heading": "engineering update",
+    "ticket": 4471,
+    "ticketStateAsShown": "closed 05 oct",
+    "outcomes": [
+      {
+        "cause": "parser",
+        "state": "FIXED",
+        "description": "fix(dates): parse dd/mm for eu locales",
+        "trackerReason": "completed"
+      },
+      {
+        "cause": "hint",
+        "state": "WON'T FIX",
+        "description": "booking-v3 form retired",
+        "trackerReason": "not planned"
+      }
+    ],
+    "limits": "Course support-desk dispositions, not a production implementation or independently exercised fix. The five flagged observations remain unverified individually; historical report assignments are unchanged."
+  },
   "rawRows": 427,
   "uniqueReports": 412,
   "duplicateRows": 15,

@@ -75,6 +75,16 @@ Vite resolves the original `#lib` imports and eager tenant/page globs.
 Every KB route is written under `rendered/`; the root opens the signed review.
 The build replaces generated `rendered/` files, so capture screenshots again after rebuilding.
 
+### Desk update and ticket dispositions
+
+After the first submission, the course page published `#4471 · closed 05 oct`:
+parser **FIXED** (`fix(dates): parse dd/mm for eu locales`), hint **WON'T FIX**
+(`booking-v3 form retired`). The signed review now renders those separate outcomes from
+[`src/lib/data/desk-update.json`](src/lib/data/desk-update.json), with its source URL and
+observation date. The parser issue closes as completed; the hint issue closes as not planned.
+Retirement is not a repaired hint, and neither disposition supplies individual verification
+of the five anomalous observations. Historical filing counts and original export files remain unchanged.
+
 ### Scope and ongoing desk work
 
 The two issue counts are **provisional filing assignments**, not a production root-cause

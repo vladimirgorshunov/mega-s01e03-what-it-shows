@@ -1,6 +1,7 @@
 import exportedReports from '#lib/data/reports-4471.json';
 import notes from '#lib/data/desk-notes.json';
 import issues from '#lib/data/review-issues.json';
+import deskUpdate from '#lib/data/desk-update.json';
 import { causeOf, dayFirst, groupByCause, uniqueById, type Report } from '#lib/kb/causes';
 import { tenantHandles, tenantOf } from '#lib/kb/locales';
 
@@ -37,6 +38,7 @@ export const tenantRows = tenantHandles().map((handle) => {
 export const evidence = {
   provenance: 'support-kb export dated 2026-10-04; original source and data preserved',
   ticket: 4471,
+  deskUpdate,
   rawRows: raw.length,
   uniqueReports: reports.length,
   duplicateRows: raw.length - uniqueById(raw).length,

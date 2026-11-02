@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 reviewed · separate the causes, keep the uncertainty'
 owner: Vladimir Gorshunov
-status: reviewed
+status: closed
 reviewed: 2026-11-02
 signature: 'Vladimir Gorshunov / OpenAI Codex / S01E03 / 2026-11-02'
 ---
@@ -22,17 +22,28 @@ rendered data disagrees. This review uses the complete 2026-10-04 export, dedupl
 IDs, and reads every tenant's locale and booking form. The original pages, components and
 accepted decision remain intact as historical evidence, not as the conclusion of this review.
 
-## File the problems separately
+## Latest desk update — closed, with different outcomes
+
+<EvidenceReview section="outcomes" />
+
+The desk has now reported the parser fix and retired the booking-v3 form instead of fixing
+its hint. Those are different dispositions: **completed** for the parser issue, **not planned**
+for the hint issue. Retired is not repaired, and closing a ticket is not evidence that every
+symptom in it was reproduced or explained. The linked issues retain their historical counts
+and the unresolved observations below. This repository records the desk's update; it does not
+contain or claim to have tested the production fix.
+
+## Problems filed separately
 
 <EvidenceReview section="summary" />
 
-**Parser:** the shared parser reads month first, while these tenants write day first.
-App and email reports, plus booking-v2 form reports, follow that assignment. A booking-v3
-tenant's app/email report still follows the parser path.
+**Parser:** in the exported incident, the shared parser read month first, while these tenants
+wrote day first. App and email reports, plus booking-v2 form reports, follow that assignment.
+A booking-v3 tenant's app/email report still follows the parser path.
 
-**Hint:** booking-v3 prints `MM/DD/YYYY`, but its form reads the date the tenant's day-first
-way. People can follow the hint and still get the wrong date. Align the hint and accepted
-input convention; a shared-parser fix alone does not settle this problem.
+**Hint:** booking-v3 printed `MM/DD/YYYY`, but its form read the date the tenant's day-first
+way. People could follow the hint and still get the wrong date. A shared-parser fix alone
+would not align that hint; the later desk decision retired the form instead.
 
 These are disjoint filing buckets computed by `causeOf`, not two production fixes demonstrated
 in this repository. The export contains no runnable booking service or production parser.
@@ -73,7 +84,8 @@ into Monday–Sunday weeks. Its range here is derived from the data, including t
 <EvidenceReview section="months" />
 
 Continued reports and the final reporter's “I have stopped reporting these” also mean the
-exported count is not a count of everyone affected. No resolution is established here.
+exported count is not a count of everyone affected. The desk's later closure is recorded
+above; this export supplies no post-fix verification of the individually flagged symptoms.
 
 ## Merge on established cause, not subject
 

@@ -37,4 +37,9 @@ assert.equal(rendered.uniqueReports, reports.length);
 assert.deepEqual(rendered.groups.map((g) => [g.cause, g.count]), groups.map((g) => [g.cause, g.reports.length]));
 assert.equal(rendered.months.reduce((sum, row) => sum + row.received, 0), reports.length);
 assert.equal(rendered.months.reduce((sum, row) => sum + row.merged, 0), reports.length);
-console.log('Evidence checks passed: deduplication, tenant/channel assignment, five caveats, future input, staleness boundary, and rendered counts.');
+assert.equal(rendered.deskUpdate.ticketStateAsShown, 'closed 05 oct');
+assert.deepEqual(rendered.deskUpdate.outcomes.map((outcome) => [outcome.cause, outcome.state, outcome.trackerReason]), [
+  ['parser', 'FIXED', 'completed'],
+  ['hint', "WON'T FIX", 'not planned'],
+]);
+console.log('Evidence checks passed: deduplication, tenant/channel assignment, five caveats, future input, staleness boundary, rendered counts, and distinct desk dispositions.');

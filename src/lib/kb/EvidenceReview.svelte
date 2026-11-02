@@ -3,12 +3,23 @@
   import { causeOf } from '#lib/kb/causes';
   import { tenantOf } from '#lib/kb/locales';
 
-  let { section }: { section: 'summary' | 'flags' | 'tenants' | 'months' } = $props();
+  let { section }: { section: 'outcomes' | 'summary' | 'flags' | 'tenants' | 'months' } = $props();
   const parser = groups.find((g) => g.cause === 'parser');
   const parserFlagged = flagged.filter((report) => causeOf(report, tenantOf(report)) === 'parser');
 </script>
 
-{#if section === 'summary'}
+{#if section === 'outcomes'}
+  <p><strong>#{evidence.deskUpdate.ticket} · {evidence.deskUpdate.ticketStateAsShown}</strong> — <a href={evidence.deskUpdate.source}>{evidence.deskUpdate.heading}</a>, observed {evidence.deskUpdate.observedOn}.</p>
+  <table>
+    <thead><tr><th>problem</th><th>desk outcome</th><th>engineering update</th><th>tracker closure reason</th></tr></thead>
+    <tbody>
+      {#each evidence.deskUpdate.outcomes as outcome (outcome.cause)}
+        <tr><td><code>{outcome.cause}</code></td><td><strong>{outcome.state}</strong></td><td>{outcome.description}</td><td>{outcome.trackerReason}</td></tr>
+      {/each}
+    </tbody>
+  </table>
+  <p class="muted">{evidence.deskUpdate.limits}</p>
+{:else if section === 'summary'}
   <p class="total"><strong>{evidence.uniqueReports}</strong> unique reports · {evidence.rawRows} export rows · {evidence.duplicateRows} overlapping copies removed</p>
   <p>Current filing: <strong>{groups.length} buckets</strong>. Tenant/channel assignment is evidence, not a proof that every report has the same production root cause.</p>
   <section class="scroll" aria-label="Problem assignments">
@@ -16,7 +27,7 @@
       <thead><tr><th>problem</th><th>reports</th><th>tenants</th><th>received</th><th>new issue</th></tr></thead>
       <tbody>
         {#each evidence.groups as group (group.cause)}
-          <tr><td><code>{group.cause}</code></td><td><strong>{group.count}</strong></td><td>{group.tenants}</td><td>{group.firstSeen} → {group.lastSeen}</td><td>{#if group.issue}<a href={group.issue}>open issue #{group.issue.split('/').at(-1)}</a>{:else}not filed{/if}</td></tr>
+          <tr><td><code>{group.cause}</code></td><td><strong>{group.count}</strong></td><td>{group.tenants}</td><td>{group.firstSeen} → {group.lastSeen}</td><td>{#if group.issue}<a href={group.issue}>issue #{group.issue.split('/').at(-1)}</a>{:else}not filed{/if}</td></tr>
         {/each}
       </tbody>
     </table>
