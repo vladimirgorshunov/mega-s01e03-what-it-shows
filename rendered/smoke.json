@@ -13,8 +13,9 @@
     { "cause": "hint", "state": "WON'T FIX", "description": "booking-v3 form retired", "trackerReason": "not planned" }
   ],
   "pageStatus": "closed",
-  "deskRef": "DR-2JTV-PVK2",
-  "signature": "Vladimir Gorshunov / OpenAI Codex / S01E03 / 2026-11-02",
+  "deskRef": "DR-7HF3-9CKE",
+  "signature": "v1.eyJzdWIiOiIzMjgzIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTM2NDUxMzYsImV4cCI6MTc5MzczMTUzNn0.1kI4K_sIQYA7U0pUP291oB6VU7hrEmNPVCcgp3s9bNQ",
+  "author": "Vladimir Gorshunov with OpenAI Codex",
   "loadedCssRules": 42,
   "renderedWeeklyChartBars": 54,
   "flaggedIds": ["R-41202", "R-41209", "R-41236", "R-41344", "R-41620"],
@@ -27,6 +28,6 @@
   "capture": "review-desktop.png",
   "viewport": { "width": 1024, "height": 678 },
   "documentHeightCssPixels": 5455,
-  "clientAsset": "/assets/entry-client-5UUeE9sH.js",
+  "clientAsset": "/assets/entry-client-D6ChpFVH.js",
   "scope": "Course-sourced support-desk dispositions plus KB export evidence. No production implementation or individual verification of the five anomalous observations is claimed."
 }

@@ -98,6 +98,9 @@ not a live feed. The review supplies a data-derived timeline range; the preserve
 timeline component otherwise defaults to October 5 as its exclusive end.
 Issue bodies must be updated when their associated filing counts change.
 The signature-derived desk reference stays stable for the same signature.
+The added pages use the course-issued public page signature, not the human-readable author name.
+Authorship remains separate in the owner and author text; `RenderStamp` derives the desk reference
+from the exact issued signature. The page signature remains valid on the page after its expiry.
 
 `rendered/` is committed because the Challenge asks for the rendered page as well as source.
 Do not commit `node_modules/`, `.npm-cache/` or `.build/`; they are local and ignored.

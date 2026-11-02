@@ -4,7 +4,7 @@ title: '0002 · Match established causes, not subject lines'
 owner: Vladimir Gorshunov
 status: proposed
 reviewed: 2026-11-02
-signature: 'Vladimir Gorshunov / OpenAI Codex / S01E03 / 2026-11-02'
+signature: 'v1.eyJzdWIiOiIzMjgzIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTM2NDUxMzYsImV4cCI6MTc5MzczMTUzNn0.1kI4K_sIQYA7U0pUP291oB6VU7hrEmNPVCcgp3s9bNQ'
 ---
 
 <script>
